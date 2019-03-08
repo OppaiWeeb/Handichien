@@ -4,8 +4,6 @@
 // stockage de l'information dans l'arduino
 
 int delai_latence=10;
-int potar=A0; // entrée analogique A0 (branchée au centre du potar) 
-
 int digit1 = 2; //Afficheur le plus à gauche - chiffre 1000
 int digit2 = 3; //Afficheur centre gauche - chiffre 100
 int digit3 = 4; //Afficheur centre droit - chiffre 10
@@ -17,13 +15,12 @@ int segC = 8;
 int segD = 9;
 int segE = 10;
 int segF = 11;
-int segG = 12;
-int dp = 13;//dp = digital point
+int segG = A0;
 
 //void = fonction, contient le programme
 //setup : configuration
 void setup()
-{                
+{
  pinMode(segA, OUTPUT);
  pinMode(segB, OUTPUT);
  pinMode(segC, OUTPUT);
@@ -31,22 +28,20 @@ void setup()
  pinMode(segE, OUTPUT);
  pinMode(segF, OUTPUT);
  pinMode(segG, OUTPUT);
- pinMode(dp, OUTPUT);
+ pinMode(digit1, OUTPUT);
+ pinMode(digit2, OUTPUT);
+ pinMode(digit3, OUTPUT);
+ pinMode(digit4, OUTPUT);
 
-pinMode(digit1, OUTPUT);
-pinMode(digit2, OUTPUT);
-pinMode(digit3, OUTPUT);
-pinMode(digit4, OUTPUT);
-
-digitalWrite(digit1, LOW);
-digitalWrite(digit2, LOW);
-digitalWrite(digit3, LOW);
-digitalWrite(digit4, LOW);
-//on commence par tout éteindre
+ digitalWrite(digit1, LOW);
+ digitalWrite(digit2, LOW);
+ digitalWrite(digit3, LOW);
+ digitalWrite(digit4, LOW);
+ //on commence par tout éteindre
 }
 
 
-void afficheDigit(int num)
+void digital(int num)
 // == égalité entre 2 variables , signifie "est égal à"
 {
  if (num==0)
@@ -58,7 +53,6 @@ void afficheDigit(int num)
    digitalWrite(segE, LOW);
    digitalWrite(segF, LOW);
    digitalWrite(segG, HIGH); //éteindre g
-   digitalWrite(dp, HIGH);
    }
 
  if (num==1)
@@ -70,7 +64,6 @@ void afficheDigit(int num)
    digitalWrite(segE, HIGH);
    digitalWrite(segF, HIGH);
    digitalWrite(segG, HIGH);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==2)
@@ -82,7 +75,6 @@ void afficheDigit(int num)
    digitalWrite(segE, LOW);
    digitalWrite(segF, HIGH);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==3)
@@ -94,7 +86,6 @@ void afficheDigit(int num)
    digitalWrite(segE, HIGH);
    digitalWrite(segF, HIGH);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==4)
@@ -106,7 +97,6 @@ void afficheDigit(int num)
    digitalWrite(segE, HIGH);
    digitalWrite(segF, LOW);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==5)
@@ -118,7 +108,6 @@ void afficheDigit(int num)
    digitalWrite(segE, HIGH);
    digitalWrite(segF, LOW);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==6)
@@ -130,7 +119,6 @@ void afficheDigit(int num)
    digitalWrite(segE, LOW);
    digitalWrite(segF, LOW);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==7)
@@ -142,7 +130,6 @@ void afficheDigit(int num)
    digitalWrite(segE, HIGH);
    digitalWrite(segF, HIGH);
    digitalWrite(segG, HIGH);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==8)
@@ -154,7 +141,6 @@ void afficheDigit(int num)
    digitalWrite(segE, LOW);
    digitalWrite(segF, LOW);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 
  if (num==9)
@@ -166,7 +152,6 @@ void afficheDigit(int num)
    digitalWrite(segE, HIGH);
    digitalWrite(segF, LOW);
    digitalWrite(segG, LOW);
-   digitalWrite(dp, HIGH);
    }
 }
 
@@ -192,7 +177,7 @@ digitalWrite(digit1, LOW);
 digitalWrite(digit2, HIGH);
 afficheDigit(nb);
 
-delay(delai_latence);  
+delay(delai_latence);
 
 //affiche le chiffre des 10
 num=num-nb*100;
@@ -201,7 +186,7 @@ digitalWrite(digit2, LOW);
 digitalWrite(digit3, HIGH);
 afficheDigit(nb);
 
-delay(delai_latence);  
+delay(delai_latence);
 
 //affiche le chiffre des 1
 num=num-nb*10;
@@ -210,7 +195,7 @@ digitalWrite(digit3, LOW);
 digitalWrite(digit4, HIGH);
 afficheDigit(nb);
 
-delay(delai_latence);  
+delay(delai_latence);
 }
 
 void loop()
@@ -220,15 +205,5 @@ void loop()
 affiche4digits(2017);
 // on choisit le chiffre que l'on souhaite afficher, c'est ici qu'il faut indiquer le nombre à afficher de 0000 à 9999
 
-delai_latence=1;//+(analogRead(potar)/2); // A REGLER LORS DES TESTS;
-
-// pour la compréhension, on a ajouté un potentiomètre nous permettant de faire varier la durée du temps de latence entre l'affichage de chaque chiffre
-// dans l'ordre :
- //affichage du chiffre des 1000
- //affichage du chiffre des 100
- //affichage du chiffre des 10
- //affichage du chiffre des 1
-// l'afficheur a 4 chiffres est tellement rapide que nous avons l'impression de les avoir affiché en simultanée
-// en réalité, ils s'affichent les uns après les autres
 
 }
