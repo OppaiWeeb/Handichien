@@ -7,11 +7,11 @@ void setup() {
   const unsigned int ECHO_PIN=12;
   const unsigned int BAUD_RATE=9600;
 // setup Afficheur
-  int delai_latence=10;
-  int digit1 = 2; // chiffre des 1000
-  int digit2 = 3; // chiffre des 100
-  int digit3 = 4; // chiffre des 10
-  int digit4 = 5; // chiffre des 1
+  int delai_latence=1;
+  int digit1 = 2;// chiffre des 1000
+  int digit2 = 3;// chiffre des 100
+  int digit3 = 4;// chiffre des 10
+  int digit4 = 5;// chiffre des 1
   int segA = 6;// haut
   int segB = 7;// haut droit
   int segC = 8;// bas droit
@@ -30,12 +30,15 @@ void setup() {
   pinMode(digit2, OUTPUT);
   pinMode(digit3, OUTPUT);
   pinMode(digit4, OUTPUT);
+
 // setup all digit down
   digitalWrite(digit1, LOW);
   digitalWrite(digit2, LOW);
   digitalWrite(digit3, LOW);
   digitalWrite(digit4, LOW);
-// setup sd
+
+// Var/Tours
+  int course=0;
 }
 
 void distance()
@@ -50,12 +53,10 @@ void distance()
  const unsigned long duration= pulseIn(ECHO_PIN, HIGH);
  int distance= duration/29/2;
  if(duration==0){
-   Serial.println("Warning: no pulse from sensor");
+   Serial.println("U r God we can't detect");
    }
   else{
-      Serial.print("distance to nearest object:");
-      Serial.println(distance);
-      Serial.println(" cm");
+       course=course+1
     }
  delay(100);
 }
@@ -215,3 +216,10 @@ void distance()
 
  delay(delai_latence);
  }
+
+void loop () 
+{
+  distance();
+  digital();
+  num();
+}
